@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion</title>
+    <script>
+        function closeDialog(){
+            var myDialog
+            myDialog = document.getElementById("dialog");
+            myDialog.style.display = "none";
+        }
+        function openDialog(){
+            var myDialog
+            myDialog = document.getElementById("dialog");
+            myDialog.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div style="border: 5px solid red; display:block;"  id="dialog">
+        hullo
+    </div>
+    <button onclick="openDialog()"> open </button>
+    <button onclick="closeDialog()"> close </button>
+</body>
+</html>

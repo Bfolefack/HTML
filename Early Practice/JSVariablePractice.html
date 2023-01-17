@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Boueny</title>
+    <script>
+        var a = "welcome to my page";
+        alert(a);
+        alert(sum(10, 15));
+        function sum(a, b){
+            return a + b;
+        }
+
+        function userMessage(){
+            var message;
+            message = document.getElementById("userInput").value;
+            alert(message);
+            document.getElementById("userOutput").value = document.getElementById("userInput").value;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="alert('you clicked a button')">
+        Click!
+    </button>
+    <input id="userInput" type="text">
+    <button onclick="userMessage()">Click Me!</button>
+    <input id="userOutput" type="text">
+</body>
+</html>

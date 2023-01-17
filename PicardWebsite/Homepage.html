@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boueny's Stuff</title>
+    <style>
+        .scrolling-wrapper {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            width: 80%;
+            margin-left:10%;
+            margin-right:10%;
+        }
+        .card {
+            display: inline-block;
+            color:black;
+            padding:15px;
+            margin:5px;
+            border:black 3px;
+            width: 33%;
+            max-height: 70%;
+            user-select: none;
+            max-height:70%;
+        }
+        .main {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            min-width: 300px;
+            color:black;
+            padding: 10px;
+            border-left: black 3px solid;
+            border-right: black 3px solid;
+        }
+        .miniCard {
+            width: 100%;
+            color:black;
+            padding: 5px;
+            border: black 3px solid;
+            margin: 15px;
+            margin-left:0px;
+            background-color: lightblue;
+        }
+        .thumb {
+            max-width:80%;
+            color:white;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="background-color: #1d026e">
+    
+    <div class="main" style="background-color:cadetblue; margin-top:30px; border-top: black 3px solid">
+        <img src ="imgs/boueny.png" alt ="boueny" style ="width: 30%; margin-left: 35%; border-radius: 50%; border:black 3px solid;" >
+        <h1 style=" 
+            text-align:center;
+            font-size: xxx-large;
+        ">Boueny Folefack</h1>
+
+    </div>
+    <div class="main" style="background-color:cadetblue">
+        <h1 style="margin:20px; margin-left:12%;">About Me</h1>
+        <p style="margin:20px; font-size:20px; margin-left: 15%; margin-right: 15%;"> 
+            My name is Boueny Folefack, and I am a sophmore at Carroll High School. My hobbies include
+            programming, writing, board games, and many other things. I started programming because I saw 
+            how impressive machine learning algorithms could be, and wanted to learn to do that for myself.
+            This website is a collection of all my best projects.
+        </p>
+    </div>
+    <div class="main" style="background-color: lightblue;">
+        <h1>My Projects</h1>
+        <div class="scrolling-wrapper">
+            <a href="Projects/ProceduralMap.html">
+            <div class="card" style="background-color: cadetblue; border: solid;">
+                <img src="imgs/ProceduralMapThumb.png" class="thumb">
+                <h2 style="margin:5px;">Procedural Map</h2>
+            </div>
+            </a>
+
+            <a href="Projects/Calculator.html">
+                <div class="card" style="background-color: cadetblue; border: solid;">
+                    <img src="imgs/CalculatorThumb.png" class="thumb">
+                    <h2 style="margin:5px;">Calculator</h2>
+                </div>
+                </a>
+
+            <div class="card" style="background-color: cadetblue; border: solid;">
+                <h2>Project</h2>
+            </div>
+
+            <div class="card" style="background-color: cadetblue; border: solid;">
+                <h2>Project</h2>
+            </div>
+        </div>
+    </div>
+    <div class="main" style="background-color: cadetblue;">
+        <h1>My Hobbies</h1>
+
+        
+
+            <div class= "card" style="width:40%">
+                <div class = "miniCard">
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-pencil-square-o fa-4x" aria-hidden="true"></i></td>
+                            <td><h2>Writing</h2></td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div class = "miniCard">
+                    <table>
+                        <tr>
+                            <td><img src="imgs/die.png" style="width:60px"></i></td>
+                            <td><h2>Board Games</h2></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class= "card" style="width:40%">
+                <div class = "miniCard">
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-gamepad fa-4x" aria-hidden="true"></i></td>
+                            <td><h2>Gamedev</h2></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class = "miniCard">
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-paint-brush fa-4x" aria-hidden="true"></i></td>
+                            <td><h2>Art(sometimes)</h2></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        
+
+    </div>
+    <div class="main" style="background-color: lightblue; border-bottom: 3px solid black">
+        <h1 style="text-align: center;">Contacts</h1>
+        <table style="width:20%; margin-left:40%; margin-right: 40%;">
+            <tr>
+                <td><i class="fa fa-github fa-4x" aria-hidden="true"></i></td>
+                <td><a href="https://github.com/Bfolefack"><h2>Github</h2></a></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-linkedin fa-4x" aria-hidden="true"></i></td>
+                <td><a href="https://this-page-intentionally-left-blank.org"><h2>Linkedin</h2></a></td></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-envelope fa-4x" aria-hidden="true"></i></td>
+                <td><a href="mailto:bouenyfolefack@gmail.com"><h2>Gmail</h2></a></td></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-youtube-play fa-4x" aria-hidden="true"></i></td>
+                <td><a href="https://www.youtube.com/channel/UCCUSuXHibcHqxykde0CaKbA/"><h2>Youtube</h2></a></td></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

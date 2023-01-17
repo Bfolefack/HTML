@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Calculator </title>
+
+    <style>
+        .main {
+            margin-left: 25%;
+            margin-right: 25%;
+            min-width: 300px;
+            min-height: 100px;
+            color:black;
+            padding: 10px;
+            border: black 3px solid;
+            background-color: darkcyan;
+        }
+        .calculatorContainer {
+            margin-left: 12.5%;
+            min-height: 100px;
+            margin-right: 12.5%;
+            color:black;
+            padding: 20px;
+            border: black 3px solid;
+            background-color:cadetblue;
+        }
+        .calculatorDisplay {
+            margin-left: 5%;
+            margin-right: 5%;
+            color:black;
+            padding: 10px;
+            border: black 3px solid;
+            background-color:darkcyan;
+            font-size:50px;
+            text-align:right;
+            min-height: 60px;
+        }
+        .calculatorButton {
+            width: 90%;
+            margin-left: 5%;
+            min-height: 25px;
+            margin-right: 5%;
+            color:black;
+            border: black 3px solid;
+            background-color:darkcyan;
+            text-align: center;
+            padding:0px;
+            font-size: 70px;
+            user-select: none;
+            cursor:pointer;
+        }
+        .operationButton {
+            width: 90%;
+            margin-left: 5%;
+            min-height: 25px;
+            margin-right: 5%;
+            color:black;
+            border: black 3px solid;
+            background-color:rgb(0, 190, 190);
+            text-align: center;
+            padding:0px;
+            font-size: 70px;
+            user-select: none;
+            cursor:pointer;
+        }
+        .pressedOperationButton {
+            width: 90%;
+            margin-left: 5%;
+            min-height: 25px;
+            margin-right: 5%;
+            color:black;
+            border: black 3px solid;
+            background-color:rgb(0, 240, 240);
+            text-align: center;
+            padding:0px;
+            font-size: 70px;
+            user-select: none;
+            cursor:pointer;
+        }
+    </style>
+
+    <script>
+        var num1;
+        var num2;
+        var deci = false;
+        var opEntered = false;
+        var display;
+        var opType;
+
+        function typeNum (a){
+            if(a == "."){
+                if (display == ""){
+                    a = "0.";
+                    console.log(a);
+                    display += a;
+                    console.log(display);
+                    console.log(document.getElementById("numDisplay").innerHTML);
+                    document.getElementById("numDisplay").innerHTML = display;
+                    deci = true;
+                } else if(!deci){
+                    console.log(a);
+                    display += a;
+                    console.log(display);
+                    console.log(document.getElementById("numDisplay").innerHTML);
+                    document.getElementById("numDisplay").innerHTML = display;
+                    deci = true;
+                }
+            } else {
+                console.log(a);
+                display += a;
+                console.log(display);
+                console.log(document.getElementById("numDisplay").innerHTML);
+                document.getElementById("numDisplay").innerHTML = display;
+            }
+            
+        }
+
+        function negative (){
+            var b = parseFloat(display)
+            b *= -1;
+            display = b + "";
+            document.getElementById("numDisplay").innerHTML = display;
+        }
+
+        function buttonClear (){
+            clear();
+        }
+
+        function clear (){
+            num1 = null;
+            num2 = null;
+            display = "";
+            deci = false;
+            document.getElementById("numDisplay").innerHTML = display;
+            console.log("cleared!");
+            opEntered = false;
+            opType = null;
+
+            document.getElementById("sum").classList.remove("pressedOperationButton")
+            document.getElementById("sub").classList.remove("pressedOperationButton")
+            document.getElementById("mult").classList.remove("pressedOperationButton")
+            document.getElementById("divi").classList.remove("pressedOperationButton")
+        }
+
+        function op (a){
+            if(!opEntered){
+                if(display === ""){
+                    display = "0";
+                }
+                num1 = parseFloat(display);
+                display = "";
+                deci = false;
+                document.getElementById("numDisplay").innerHTML = display;
+                opEntered = true;
+            }
+            opType = a;
+
+            document.getElementById("sum").classList.remove("pressedOperationButton")
+            document.getElementById("sub").classList.remove("pressedOperationButton")
+            document.getElementById("mult").classList.remove("pressedOperationButton")
+            document.getElementById("divi").classList.remove("pressedOperationButton")
+
+            document.getElementById(a).classList.add("pressedOperationButton")
+        }
+
+        function equals(){
+            if(opEntered){
+                if(display === ""){
+                    display = "0";
+                }
+                num2 = parseFloat(display);
+                if(opType === "sum"){
+                    num1 += num2;
+                } else if(opType === "sub"){
+                    num1 -= num2;
+                }else if(opType === "mult"){
+                    num1 *= num2;
+                }else if(opType === "divi"){
+                    num1 /= num2;
+                }
+                
+                display = "" + num1;
+                num2 = null;
+                opEntered = false;
+                opType = null;
+                document.getElementById("numDisplay").innerHTML = display;
+
+                document.getElementById("sum").classList.remove("pressedOperationButton")
+                document.getElementById("sub").classList.remove("pressedOperationButton")
+                document.getElementById("mult").classList.remove("pressedOperationButton")
+                document.getElementById("divi").classList.remove("pressedOperationButton")
+            }
+        }
+    </script>
+    
+
+</head>
+<body style="background-color: #1d026e;">
+    <div class = "main">
+        <div class ="calculatorContainer">
+
+            <div class ="calculatorDisplay">
+                <p id="numDisplay" style = "margin:0px;" innerHTML = "";></p>
+            </div>
+
+            <script>
+                clear();
+            </script>
+
+            <table style="margin-left: 5%; margin-right: 5%; width: 90%;">
+                <td>
+                    <tr>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("9")'>
+                                9
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("8")'>
+                                8
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("7")'>
+                                7
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="operationButton" onclick='op("sum")' id="sum">
+                                +
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("6")'>
+                                6
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("5")'>
+                                5
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("4")'>
+                                4
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="operationButton" onclick='op("sub")' id="sub">
+                                -
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("3")'>
+                                3
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("2")'>
+                                2
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("1")'>
+                                1
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="operationButton" onclick='op("mult")' id="mult">
+                                x
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum("0")'>
+                                0
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='typeNum(".")'>
+                                .
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='negative()'>
+                                -
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="operationButton" onclick='op("divi")' id = "divi">
+                                ÷
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style=width:25%;></td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='buttonClear()'>
+                                C
+                            </div>
+                        </td>
+                        <td style=width:25%;>
+                            <div class="calculatorButton" onclick='equals()'>
+                                =
+                            </div>
+                        </td>
+                    </tr>
+                </td>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
