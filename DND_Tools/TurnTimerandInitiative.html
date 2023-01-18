@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn Timer</title>
+    <style>
+        body{
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .timer-button{
+            width: 49%;
+            height: 100%;
+            margin: 0%;
+            padding: 0%;
+            overflow: visible;
+            display: inline-block;
+        }
+        .stick-sides{
+            border: none;
+            margin: 0%;
+            padding: 0%;
+            overflow: hidden;
+        }
+        .initiative-entry{
+            height: 90%; 
+            font-size: 4vh; 
+            text-align: center; 
+            border:3px solid black;; 
+            background: none; 
+            display:inline-block;
+            margin: 0%;
+            padding: 0%;
+            overflow: visible;
+            vertical-align: top;
+        }
+        div{
+            vertical-align: top;
+        }
+        li{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    
+</head>
+<body>
+        <div style=" display: inline-block; padding:0; width: 49.5%; height: 95vh; overflow: visible; border: solid 0.1px black;" class="stick-sides">
+            <div style="width:100%; height: 50%;" class="stick-sides">
+                <p id="numDisplay" innerHTML = "" class="stick-sides" style="text-align: center; font-size: 20vh; margin: auto; padding: 10vh 0" >0:00</p>
+            </div>
+            <div style="width:100%; height: 50%;" class="stick-sides">
+                <div  style="width:100%; height: 50%;" class="stick-sides">
+                    <button class="timer-button" onclick="test = true;updateDisplay();">Start</button>
+                    <button class="timer-button" onclick="test = false;updateDisplay();">Stop</button>
+                </div>
+                <div  style="width:100%; height: 50%;" class="stick-sides">
+                    <button class="timer-button" onclick="nextTurn(60);">Next Turn</button>
+                    <button class="timer-button" onclick="test = false; num = 0;updateDisplay();">Reset</button>
+                </div>
+            </div>
+        </div>
+        <div style=" display: inline-block; padding:0; width: 49.5%; height: 95vh; overflow: visible; border: solid 0.1px black;" class="stick-sides" >
+            <div style="width:100%; height: 20%;" class>
+                <div  style="width: 20%; height: 100%; display: inline-block; overflow:visible;" class="initiative-entry">
+                    <input type="number" id="initiatveNumberInput" style="width: 100%; height:100%; font-size: 10vh;" >
+                </div>
+                <div  style="width: 40%; height: 100%; display: inline-block; overflow:visible; " class="initiative-entry">
+                    <input type="text" id="initiatveNameInput" style="width: 100%; height:100%; font-size: 10vh;" >
+                </div>
+                <div  style="width: 25%; height: 100%; display: inline-block; overflow:visible;" class="initiative-entry">
+                    <button style="width: 100%; height: 33%; overflow:visible" onclick="addElement();">Add</button>
+                    <button style="width: 100%; height: 33%; overflow:visible" onclick="nextTurn(0);">Next Turn</button>
+                    <button style="width: 100%; height: 33%; overflow:visible" onclick="clearList();">Clear</button>
+                </div>
+            </div>
+            <div style="width:100%; height: 90%; background:none;" class="stick-sides">
+                <ul id="Initiative List" style="font-size:5vh">
+                </ul>
+            </div>
+        </div>
+    
+    <script>
+        test = false;
+        var num = 0;
+        var numDisplay = document.getElementById("numDisplay");
+        var map = new Map();
+        var offset = 0;
+        startTimer();
+
+        function startTimer(){
+                var timer = setInterval(function(){
+                    if(test && num > 0){
+                        num--;
+                    }
+                    if(num <= 20 && num > 0 && test){
+                        if(document.body.style.backgroundColor == "yellow")
+                            document.body.style.backgroundColor = "white";
+                        else
+                            document.body.style.backgroundColor = "yellow";
+                    }
+                    
+
+                    numDisplay.innerHTML = String(Math.floor(num/60) + ":" + ((num % 60)/10 >= 1 ? "":"0") + num % 60);
+                }, 1000);
+
+                var timer = setInterval(function(){
+                    if(num <= 0 && test){
+                        if(document.body.style.backgroundColor == "red")
+                            document.body.style.backgroundColor = "white";
+                        else
+                            document.body.style.backgroundColor = "red";
+                    }
+                }, 1);
+            }
+        function updateDisplay(){
+            numDisplay.innerHTML = String(Math.floor(num/60) + ":" + ((num % 60)/10 >= 1 ? "":"0") + num % 60);
+            document.body.style.backgroundColor = "white"
+        }
+        function addElement(){
+            var number = parseInt( document.getElementById("initiatveNumberInput").value )
+            var name = document.getElementById("initiatveNameInput").value
+
+            if(number > 50 || number < -10 || number == undefined || name == undefined || name == ""){
+                return;
+            }
+            
+            var li = document.createElement("li");
+            li.innerHTML = document.getElementById("initiatveNumberInput").value + " " + document.getElementById("initiatveNameInput").value;
+            
+            li.id = name;
+            console.log(typeof number)
+            console.log(number)
+            map.set(number, name);
+            renderList();
+        }
+        function nextTurn(time){
+            num += time;
+            updateDisplay();
+            offset++;
+            if(offset >= map.size)
+                offset = 0;
+            renderList();
+        }
+        function compareNumbers(a, b) {
+            return parseInt(b) - parseInt(a);
+        }
+        function clearList(){
+            map.clear();
+            renderList();
+        }
+        function renderList(){
+            while(document.getElementById("Initiative List").firstChild){
+                document.getElementById("Initiative List").removeChild(document.getElementById("Initiative List").firstChild);
+            }
+            map = new Map([...map.entries()].sort(compareNumbers));
+            //for(var i = 0; i < offset; i++){
+            //    temp = map.entries().next().value;
+            //    map.delete(temp[0])
+            //    map.set(temp[0], temp[1])
+            //}
+            
+            for (let [key, value] of map) {
+                var li = document.createElement("li");
+                li.innerHTML = key + " " + value;
+                li.id = value;
+                li.style.cursor = "pointer";
+                li.onclick = function(){removeElement(key)};
+                document.getElementById("Initiative List").appendChild(li);
+            }
+
+            if(map.size > 0){
+                temp = map.entries()
+                id =  temp.next().value[1];
+                for (let i = 0; i < offset; i++) {
+                    id = temp.next().value[1];
+                }
+                document.getElementById(id).style.backgroundColor = "lime";
+            }
+            
+        }
+        function removeElement(number){
+            map.delete(number);
+            renderList();
+        }
+    </script>
+</body>
+</html>
