@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn Timer & Initiative</title>
+    <link rel="stylesheet" type="text/css" href="Initiative.css">
+</head>
+
+<body>
+    <div id="main-menu">
+        <button style="width:100%; height:45vh; margin: auto auto;" onclick="playerLogin();">Player</button>
+        <button style="width:100%; height:45vh; margin: auto auto;" onclick="GMLogin();">GM</button>
+    </div>
+
+
+    <div id="player-view" style="display: none;">
+        <div  class="stick-sides main-block " style="width:100%; height:30vh">
+            <div style="width:100%; height: 50%;" class="stick-sides">
+                <p id="PlayerNumDisplay" innerHTML = "" class="stick-sides timer" style="font-size:7vh; height:auto; padding-top:5vh">0:00</p>
+            </div>
+            <div style="width:100%; height: 50%;" class="stick-sides">
+                <div  style="width:100%; height: 100%;" class="stick-sides">
+                    <button class="timer-button" style="width: 100%;" onclick="nextTurn();">End Turn</button>
+                    <!-- <button class="timer-button" onclick="test = false; num = 0;updateDisplay();">Reset</button> -->
+                </div>
+            </div>
+        </div>
+        <div  class="stick-sides main-block " style="width: 100%; height: 65vh">
+            <div style="width:100%; height: 20%;" class>
+                <div  style="width: 10%;" class="initiative-entry">
+                    <input type="number" id="PlayerInitiatveNumberInput" class="initiative-entry-input">
+                </div>
+                <div  style="width: 10%;" class="initiative-entry">
+                    <input type="number" id="PlayerInitiatveACInput" class="initiative-entry-input">
+                </div>
+                <div  style="width: 50%;" class="initiative-entry">
+                    <input type="text" id="PlayerInitiatveNameInput" class="initiative-entry-input">
+                </div>
+                <div  style="width: 25%;" class="initiative-entry">
+                    <button class="initiative-button" style="width:95%; height: 95%" onclick="addElement();">Add</button>
+                </div>
+            </div>
+            <div style="width:100%; height: 90%; background:none;" class="stick-sides">
+                <ul id="PlayerInitiativeList" style="font-size:5vh">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+        <div id="gm-view" style="display: none;">
+            <div style="width:39.5%" class="stick-sides main-block ">
+                <div style="width:100%; height: 50%;" class="stick-sides">
+                    <p id="GMNumDisplay" innerHTML = "" class="stick-sides timer">0:00</p>
+                </div>
+                <div style="width:100%; height: 50%;" class="stick-sides">
+                    <div  style="width:100%; height: 50%;" class="stick-sides">
+                        <button class="timer-button" onclick="unpauseTimer();updateDisplay();">Start</button>
+                        <button class="timer-button" onclick="pauseTimer();updateDisplay();">Stop</button>
+                    </div>
+                    <div  style="width:100%; height: 50%;" class="stick-sides">
+                        <button class="timer-button" onclick="addTime(60);">Add Time</button>
+                        <button class="timer-button" onclick="resetTimer();updateDisplay();">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 59.5%;" class="stick-sides main-block " >
+                <div style="width:100%; height: 20%;" class>
+                    <div  style="width: 10%;" class="initiative-entry">
+                        <input type="number" id="GMInitiatveNumberInput" class="initiative-entry-input">
+                    </div>
+                    <div  style="width: 10%;" class="initiative-entry">
+                        <input type="number" id="GMInitiatveACInput" class="initiative-entry-input">
+                    </div>
+                    <div  style="width: 50%;" class="initiative-entry">
+                        <input type="text" id="GMInitiatveNameInput" class="initiative-entry-input">
+                    </div>
+                    <div  style="width: 25%;" class="initiative-entry">
+                        <button class="initiative-button" onclick="addElement();">Add</button>
+                        <button class="initiative-button" onclick="nextTurn();">Next Turn</button>
+                        <button class="initiative-button" onclick="clearInitiative();">Clear</button>
+                    </div>
+                </div>
+                <div style="width:100%; height: 90%; background:none;" class="stick-sides">
+                    <ul id="GMInitiativeList" style="font-size:5vh">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+
+</html>

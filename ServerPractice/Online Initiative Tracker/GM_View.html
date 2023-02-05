@@ -5,84 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turn Timer</title>
-    <style>
-        body{
-            background-color: white;
-            margin: 0;
-            padding: 0;
-        }
-        .timer-button{
-            width: 49%;
-            height: 100%;
-            margin: 0%;
-            padding: 0%;
-            overflow: visible;
-            display: inline-block;
-        }
-        .stick-sides{
-            border: none;
-            margin: 0%;
-            padding: 0%;
-            overflow: hidden;
-        }
-        .initiative-entry{
-            height: 90%; 
-            font-size: 4vh; 
-            text-align: center; 
-            border:3px solid black;; 
-            background: none; 
-            display:inline-block;
-            margin: 0%;
-            padding: 0%;
-            overflow: visible;
-            vertical-align: top;
-        }
-        div{
-            vertical-align: top;
-        }
-        li{
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="Initiative.css">
     
 </head>
 <body>
-        <div style=" display: inline-block; padding:0; width: 49.5%; height: 95vh; overflow: visible; border: solid 0.1px black;" class="stick-sides">
-            <div style="width:100%; height: 50%;" class="stick-sides">
-                <p id="numDisplay" innerHTML = "" class="stick-sides" style="text-align: center; font-size: 20vh; margin: auto; padding: 10vh 0" >0:00</p>
+    <div style="width:49.5%" class="stick-sides main-block ">
+        <div style="width:100%; height: 50%;" class="stick-sides">
+            <p id="numDisplay" innerHTML = "" class="stick-sides timer">0:00</p>
+        </div>
+        <div style="width:100%; height: 50%;" class="stick-sides">
+            <div  style="width:100%; height: 50%;" class="stick-sides">
+                <button class="timer-button" onclick="test = true;updateDisplay();">Start</button>
+                <button class="timer-button" onclick="test = false;updateDisplay();">Stop</button>
             </div>
-            <div style="width:100%; height: 50%;" class="stick-sides">
-                <div  style="width:100%; height: 50%;" class="stick-sides">
-                    <button class="timer-button" onclick="test = true;updateDisplay();">Start</button>
-                    <button class="timer-button" onclick="test = false;updateDisplay();">Stop</button>
-                </div>
-                <div  style="width:100%; height: 50%;" class="stick-sides">
-                    <button class="timer-button" onclick="nextTurn(60);">Next Turn</button>
-                    <button class="timer-button" onclick="test = false; num = 0;updateDisplay();">Reset</button>
-                </div>
+            <div  style="width:100%; height: 50%;" class="stick-sides">
+                <button class="timer-button" onclick="num+=60;renderList();">Next Turn</button>
+                <button class="timer-button" onclick="test = false; num = 0;updateDisplay();">Reset</button>
             </div>
         </div>
-        <div style=" display: inline-block; padding:0; width: 49.5%; height: 95vh; overflow: visible; border: solid 0.1px black;" class="stick-sides" >
-            <div style="width:100%; height: 20%; display:flex" class>
-                <div  style="width: 20%; height: 100%; display: inline-block; overflow:visible;" class="initiative-entry">
-                    <input type="number" id="initiatveNumberInput" style="width: 100%; height:100%; font-size: 10vh;">
-                </div>
-                <div  style="width: 50%; height: 100%; display: inline-block; overflow:visible; " class="initiative-entry">
-                    <input type="text" id="initiatveNameInput" style="width: 100%; height:100%; font-size: 10vh;">
-                </div>
-                <div  style="width: 25%; height: 100%; display: inline-block; overflow:visible;" class="initiative-entry">
-                    <button style="width: 100%; height: 33%; overflow:visible" onclick="addElement();">Add</button>
-                    <button style="width: 100%; height: 33%; overflow:visible" onclick="nextTurn(0);">Next Turn</button>
-                    <button style="width: 100%; height: 33%; overflow:visible" onclick="clearList();">Clear</button>
-                </div>
+    </div>
+    <div style="width: 49.5%;" class="stick-sides main-block " >
+        <div style="width:100%; height: 20%;" class>
+            <div  style="width: 20%;" class="initiative-entry">
+                <input type="number" id="initiatveNumberInput" class="initiative-entry-input">
             </div>
-            <div style="width:100%; height: 90%; background:none;" class="stick-sides">
-                <ul id="Initiative List" style="font-size:5vh">
-                </ul>
+            <div  style="width: 50%;" class="initiative-entry">
+                <input type="text" id="initiatveNameInput" class="initiative-entry-input">
+            </div>
+            <div  style="width: 25%;" class="initiative-entry">
+                <button class="initiative-button" onclick="addElement();">Add</button>
+                <button class="initiative-button" onclick="nextTurn(0);">Next Turn</button>
+                <button class="initiative-button" onclick="clearList();">Clear</button>
             </div>
         </div>
+        <div style="width:100%; height: 90%; background:none;" class="stick-sides">
+            <ul id="Initiative List" style="font-size:5vh">
+            </ul>
+        </div>
+    </div>
     
     <script>
         test = false;
@@ -91,7 +51,7 @@
         var map = new Map();
         var offset = 0;
         startTimer();
-        getElementById("initiatveNumberInput").value = 20;
+        document.getElementById("initiatveNumberInput").value = 20;
 
         function startTimer(){
                 var timer = setInterval(function(){
@@ -182,6 +142,7 @@
                 }
                 document.getElementById(id).style.backgroundColor = "lime";
             }
+            
         }
         function removeElement(number){
             map.delete(number);
